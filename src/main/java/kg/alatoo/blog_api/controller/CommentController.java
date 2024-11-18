@@ -23,12 +23,18 @@ public class CommentController {
         }
     }
 
-    @GetMapping("comments/potId")
+    @GetMapping("comments/postId")
     public ResponseEntity<?> getCommentsByPostId(@PathVariable Long postId){
         try{
             return ResponseEntity.ok(commentService.getCommentsByPostId(postId));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
+    }
+
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<String> deleteComment(@PathVariable Long commentId) {
+        commentService.deleteCommentById(commentId);
+        return ResponseEntity.ok("Comment deleted successfully");
     }
 }

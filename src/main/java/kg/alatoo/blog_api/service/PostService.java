@@ -14,4 +14,6 @@ public interface PostService {
 
     List<PostEntity> searchByName(String name);
 
+    void deletePostById(Long postId);
+
 }

@@ -3,6 +3,7 @@ package kg.alatoo.blog_api.service;
 import jakarta.persistence.EntityNotFoundException;
 import kg.alatoo.blog_api.entities.CommentEntity;
 import kg.alatoo.blog_api.entities.PostEntity;
+import kg.alatoo.blog_api.exception.ResourceNotFoundException;
 import kg.alatoo.blog_api.repositories.CommentRepository;
 import kg.alatoo.blog_api.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,13 @@ public class CommentServiceImpl implements CommentService{
 
     public List<CommentEntity> getCommentsByPostId(Long postId){
         return commentRepository.findByPostEntityId(postId);
+    }
+
+    @Override
+    public void deleteCommentById(Long commentId) {
+        if (!commentRepository.existsById(commentId)) {
+            throw new ResourceNotFoundException("Comment not found with ID: " + commentId);
+        }
+        commentRepository.deleteById(commentId);
     }
 }

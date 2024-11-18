@@ -2,6 +2,7 @@ package kg.alatoo.blog_api.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import kg.alatoo.blog_api.entities.PostEntity;
+import kg.alatoo.blog_api.exception.ResourceNotFoundException;
 import kg.alatoo.blog_api.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,12 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAllByNameContaining(name);
     }
 
-   
+    @Override
+    public void deletePostById(Long postId) {
+        if (!postRepository.existsById(postId)) {
+            throw new ResourceNotFoundException("Post not found with ID: " + postId);
+        }
+        postRepository.deleteById(postId);
+    }
 
 }
