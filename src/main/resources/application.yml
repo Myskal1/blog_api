@@ -1,0 +1,23 @@
+spring:
+  spring:
+    main:
+      allow-bean-definition-overriding: true
+
+  datasource:
+    url: jdbc:postgresql://212.132.97.24:5432/amyskal
+    username: amyskal
+    password: r3Qqa9g3AqvB
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+jwt:
+  secret: Myskal123
+
+
